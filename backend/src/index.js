@@ -1,26 +1,23 @@
-import express from "express"
-import cors from "cors"
-import dotenv from "dotenv"
+import "./bootstrap.js"; // 🔥 MUST be first import
 
-dotenv.config();
+import express from "express";
+import cors from "cors";
+import analyzeRoute from "./routes/analyze.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
 // Health check
 app.get("/health", (req, res) => {
-    res.status(200).json({ status: "healthy" });
+  res.json({ status: "healthy" });
 });
 
 // Routes
-import analyzeRoute from "./routes/analyze.js";
 app.use("/api", analyzeRoute);
 
-// Start server
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
