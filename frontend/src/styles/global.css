@@ -42,3 +42,37 @@ p.subtitle {
   color: var(--muted);
   margin-bottom: 2rem;
 }
+
+.loading-placeholder {
+  margin-top: 2rem;
+  height: 180px;
+  border-radius: 16px;
+  background: linear-gradient(
+    90deg,
+    #10132a 25%,
+    #1b1f3b 37%,
+    #10132a 63%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .container {
+    padding: 2rem 1rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+}
+

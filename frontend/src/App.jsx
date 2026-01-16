@@ -14,27 +14,32 @@ export default function App() {
   const [error, setError] = useState("");
 
   const analyzeClaim = async () => {
-    if (!claim.trim()) return;
+  if (!claim.trim()) return;
 
-    setLoading(true);
-    setError("");
-    setResult(null);
+  setLoading(true);
+  setError("");
+  setResult(null);
 
-    try {
-      const res = await fetch("http://localhost:5000/api/analyze-claim", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ claim }),
-      });
+  try {
+    const res = await fetch("http://localhost:5000/api/analyze-claim", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ claim }),
+    });
 
-      const data = await res.json();
-      setResult(data);
-    } catch {
-      setError("Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
+    if (!res.ok) {
+      throw new Error("Analysis failed");
     }
-  };
+
+    const data = await res.json();
+    setResult(data);
+  } catch {
+    setError("We couldn’t analyze this claim right now. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="container">
@@ -49,6 +54,8 @@ export default function App() {
 
         {error && <p style={{ color: "tomato" }}>{error}</p>}
       </div>
+
+      {loading && <div className="loading-placeholder" />}
 
       <ResultCard result={result} />
     </div>
