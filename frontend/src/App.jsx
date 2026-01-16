@@ -21,7 +21,8 @@ export default function App() {
   setResult(null);
 
   try {
-    const res = await fetch("http://localhost:5000/api/analyze-claim", {
+    const API_URL = import.meta.env.VITE_API_URL;
+    const res = await fetch(`${API_URL}/api/analyze-claim`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ claim }),
