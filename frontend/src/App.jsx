@@ -5,6 +5,7 @@ import ResultCard from "./components/ResultCard";
 
 import "./styles/global.css";
 import "./styles/animations.css";
+import "./styles/results.css";
 
 export default function App() {
   const [claim, setClaim] = useState("");
